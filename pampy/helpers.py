@@ -86,7 +86,7 @@ def peek(iter_: Iterable[T]) -> T:
 
 
 def is_newtype(pattern):
-    return inspect.isfunction(pattern) and hasattr(pattern, '__supertype__')
+    return hasattr(pattern, '__supertype__')
 
 
 def is_generic(pattern):

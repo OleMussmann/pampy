@@ -70,6 +70,11 @@ def match_value(pattern, value) -> Tuple[bool, List]:
     elif isinstance(pattern, type):
         if isinstance(value, pattern):
             return True, [value]
+    # start workaround for changed NewType in Python 3.10
+    elif is_newtype(pattern):
+        if isinstance(value, pattern.__supertype__):
+            return True, [value]
+    # end workaround for changed NewType in Python 3.10
     elif isinstance(pattern, (list, tuple)):
         return match_iterable(pattern, value)
     elif isinstance(pattern, dict):
